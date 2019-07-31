@@ -34,7 +34,7 @@ got_df.shape
 got_df.ndim
 
 #only for numeric columns
-got_df.describe() # we can draw some inferences out of this!!
+got_df.describe() # to understand and infer a data a bit
 got_df.info()
 
 #For non-numeric columns
@@ -45,7 +45,7 @@ got_df['house'].value_counts()
 2) 74.5% characters are Alive
 """
 
-# We could drop the following columns as they wouldn't make any sense!
+# We could drop the following columns as they would interefere with our analysis
 
 """
 dateOfBirth,mother, father, heir,spouse
@@ -56,8 +56,7 @@ dateOfBirth,mother, father, heir,spouse
 # CLeaning Data
 ###############################
 
-#Removing all those columns which doesn't make sense/very low data/poor data quality as
-# these vars wouldn't have any effect!!
+#Removing all those columns which doesn't support our question
 df = got_df.drop(['S.No',
                   'dateOfBirth',
                   'mother',
@@ -70,7 +69,7 @@ df.info()
 
 #Checking distribution for Age as it could be important factor if a guy would be alive or not
 
-df['age'].describe()  #minimum age is -298001 which is not possible! So removing negative values
+df['age'].describe()  #minimum age is -298001 which is impossible! So removing negative values
 
 df = df.drop(df[df.age < 0].index) #431 unique values
 
@@ -82,11 +81,11 @@ dummy = df
 dummy['house'].count()
 
 ###############################
-# EDA -> Explain about 5 or 6 variables
+# EDA -> to explain about 5 or 6 variables
 ###############################
 
 # Do EDA here - Some plots,
-df['house'].value_counts() #Get some of the top counts and explain for other columns too!
+df['house'].value_counts() 
 df['isAlive'].value_counts()
 df['title'].value_counts()
 print(df['house'].value_counts().count()) #347 houses in total lol!!
@@ -229,7 +228,7 @@ feature_importances = pd.DataFrame(rf.feature_importances_,
                                    index = X_train[X_features].columns,
                                     columns=['importance']).sort_values('importance',    
                                                              ascending=False)
-#Write this recommendation
+#Write recommendation
 result = feature_importances[feature_importances['importance'] >= 0.01]
 result
 
@@ -281,7 +280,7 @@ y[Y_features] = y[Y_features].values.reshape(c,)
 X = x[X_features].values
 Y = y[Y_features].values
 
-# CV score I Will work on this tmw!!
+# CV score:
 cross_val_score(logreg, X, Y, 
                 cv=3, 
                 scoring='roc_auc')
