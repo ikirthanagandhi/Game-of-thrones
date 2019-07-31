@@ -280,9 +280,6 @@ y[Y_features] = y[Y_features].values.reshape(c,)
 X = x[X_features].values
 Y = y[Y_features].values
 
-# CV score:
-cross_val_score(logreg, X, Y, 
-                cv=3, 
-                scoring='roc_auc')
+
 
 
